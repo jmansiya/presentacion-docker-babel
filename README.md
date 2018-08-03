@@ -120,6 +120,8 @@ Podemos crear un fichero dentro de ese directorio:
 
         Si hacemos docker inspect apache2volumen nos mostrará los volumenes que tenemos montados.
 
+# Configuración de RED.        
+
 
 
 
