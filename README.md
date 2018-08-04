@@ -209,12 +209,14 @@ Se pueden ver o inspecionar los detalles de cada red usando:
 
         $ docker network inspect bridge
 
-##DETALLE BRIDGE
+## DETALLE BRIDGE
+
 Puede albergar a 65534 contenedores. Tras ejecutar el comando anterior también podremos ver si esta red tiene o no tiene contenedores en funcionamiento en la red. Todos los contenedores dentro de esta red pueden verse los unos a los otros.
 
 Esto se puede comprobar si ponemos en funcionamiento dos contenedores, por defecto los creará en la red BRIDGE, comprobamos que están en la red con *'docker network inspect bridge'*. Accedemos a uno de ellos *'docker exec -it <id_container> bash'*, instalamos el comando ping si no está instalado en el contenedor (Para ubuntu - apt-get install iputils-ping). Hacemos ping a la ip asignada al otro contenedor que está dentro de la red BRIDGE, los paquetes enviados por el comando ping deben de llegar todos perfectamente.
 
-##Redes definidas por nosotros
+## Redes definidas por nosotros
+
 Para poder aislar contenedores es necesario definir una red para esos contenedores que sea distinta de la red bridge que se asigna por defecto. Para ello:
 
         $ docker network create --driver bridge red-aislada
