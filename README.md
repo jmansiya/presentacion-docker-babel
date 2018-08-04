@@ -76,7 +76,8 @@ En esta demo veremos la ejecución de algunos comandos de docker-machine (Depend
 
     Ahora si ejecutamos docker ps veremos que seguimos teniendo el contenedor de nginx que habíamos lanzado antes de cambiar de máquina docker y si ejecutamos docker system info, tendremos la información de la máquina docker original. 
 
-# DEMO. COMANDOS DOCKER. CREACIÓN DE UNA IMAGEN.
+# DEMO. COMANDOS DOCKER. 
+## Creación de una imagen
 
 Crearemos una imagen nueva a partir de la imagen base de Ubuntu, a la cual le instalaremos un servidor web Apache2.
 Lo lanzamos con docker run en modo iteractivo y en segundo plano:
@@ -100,7 +101,7 @@ Acabamos de craer una nueva imagen en nuestro repositorio local.  Comprobamos qu
     $ docker run -it --name apache2 apache2/ubuntu:v1 /bin/bash
         root@703da3340fcc:/# dpkg –l | grep apache2
 
-# Detached o Background. 
+## Detached o Background. 
 Nos permite ejecutar un contenedor en segundo plano y poder correr comandos sobre el mismo en cualquier momento mientras esté en ejecución. Para ello usamos el flag –d.
 
     $ docker run -d --name apacheServer apache2/ubuntu:v1 /usr/sbin/apache2ctl -D FOREGROUND
@@ -117,7 +118,7 @@ Nos permite ejecutar un contenedor en segundo plano y poder correr comandos sobr
         5ba29e6c20dc        apache2/ubuntu:v1   "/usr/sbin/apache2ct…"   2 minutes ago       Up 2 minutes                            apacheServer
 
 
-# Mapeo de puertos
+## Mapeo de puertos
 Para que la aplicación que nos está sirviendo nuestro contenedor sea visible al exterior tenemos que mapear los puertos.  Podemos hacer la redirección de puertos con las opciones:
     -p: especificamos a qué puerto queremos la redirección.
     -P: le dice a Docker que si expone algún tipo de puerto haga el forwarding a un puerto aleatorio. (Dockerfile)
@@ -129,7 +130,7 @@ Para que la aplicación que nos está sirviendo nuestro contenedor sea visible a
 
  Ahora si probamos en el navegador la url http://localhost:8000  se mostrará la página web de inicio de Apache2.
 
-# Links
+## Links
 Para que dos contenedores colaboren entre ellos podemos abrir puertos y que se comuniquen por ahí, pero Docker nos ofrece la posibilidad de crear links entre contenedores.
 
     $ docker run -d --name links01 apache2/ubuntu:v1 /usr/sbin/apache2ctl -D FOREGROUND
@@ -147,7 +148,7 @@ Para que dos contenedores colaboren entre ellos podemos abrir puertos y que se c
         172.17.0.2	links01 b1a58a8cf0e5   <---->
         172.17.0.3	ca9d184b048b
 
-# Volúmenes
+## Volúmenes
 Podemos montar volúmenes de datos en nuestros contenedores. Con el flag –v podemos montar un directorio dentro de nuestro contenedor. Así podemos incorporar datos que estarían disponibles para nuestro contenedor. Además seguirá apareciendo después de un reinicio del contenedor, serán persistentes.
 También se pueden compartir volúmenes de datos entre contenedores.
 
@@ -192,7 +193,7 @@ Podemos crear un fichero dentro de ese directorio:
 
         Si hacemos docker inspect apache2volumen nos mostrará los volumenes que tenemos montados.
 
-# Configuración de RED.        
+## Configuración de RED.        
  Para ver los *tipos* de red **disponibles** por defecto en Docker, sólo hay que ejecutar:
         
         $ docker network ls
@@ -209,13 +210,13 @@ Se pueden ver o inspecionar los detalles de cada red usando:
 
         $ docker network inspect bridge
 
-## Red Bridge
+### Red Bridge
 
 Puede albergar a 65534 contenedores. Tras ejecutar el comando anterior también podremos ver si esta red tiene o no tiene contenedores en funcionamiento en la red. Todos los contenedores dentro de esta red pueden verse los unos a los otros.
 
 Esto se puede comprobar si ponemos en funcionamiento dos contenedores, por defecto los creará en la red BRIDGE, comprobamos que están en la red con *'docker network inspect bridge'*. Accedemos a uno de ellos *'docker exec -it <id_container> bash'*, instalamos el comando ping si no está instalado en el contenedor (Para ubuntu - apt-get install iputils-ping). Hacemos ping a la ip asignada al otro contenedor que está dentro de la red BRIDGE, los paquetes enviados por el comando ping deben de llegar todos perfectamente.
 
-## Redes definidas por nosotros
+### Redes definidas por nosotros
 
 Para poder aislar contenedores es necesario definir una red para esos contenedores que sea distinta de la red bridge que se asigna por defecto. Para ello:
 
