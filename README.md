@@ -193,7 +193,7 @@ Podemos crear un fichero dentro de ese directorio:
         Si hacemos docker inspect apache2volumen nos mostrará los volumenes que tenemos montados.
 
 # Configuración de RED.        
- Para ver los tipos de red disponibles por defecto en Docker, sólo hay que ejecutar:
+ Para ver los *tipos* de red **disponibles** por defecto en Docker, sólo hay que ejecutar:
         
         $ docker network ls
             NETWORK ID          NAME                DRIVER
