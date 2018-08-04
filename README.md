@@ -1,6 +1,6 @@
 # EQUIPO ARQUITECTURA BABEL. 
-# INTRODUCCIÓN A DOCKER.
-# DEMOS
+## DEMOS. INTRODUCCIÓN A DOCKER.
+
 Repositorio con los proyectos y con los datos para las demos de la presentación de introducción a Docker del equipo de arquitectura de Babel.
 
 # 1era DEMO. DOCKER-MACHINE
@@ -209,7 +209,7 @@ Se pueden ver o inspecionar los detalles de cada red usando:
 
         $ docker network inspect bridge
 
-## DETALLE BRIDGE
+## Red Bridge
 
 Puede albergar a 65534 contenedores. Tras ejecutar el comando anterior también podremos ver si esta red tiene o no tiene contenedores en funcionamiento en la red. Todos los contenedores dentro de esta red pueden verse los unos a los otros.
 
