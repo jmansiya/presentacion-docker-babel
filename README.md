@@ -3,7 +3,7 @@
 
 Repositorio con los proyectos y con los datos para las demos de la presentación de introducción a Docker del equipo de arquitectura de Babel.
 
-# 1era DEMO. DOCKER-MACHINE
+# DEMO. DOCKER-MACHINE
 En esta demo veremos la ejecución de algunos comandos de docker-machine (Dependiendo del SO que tengamos necesitaremos instalar una utilizando Virtual Box, para poder hacer funcionar en nuestros equipos docker):
 
     . Crear una nueva máquina de docker.
@@ -76,7 +76,7 @@ En esta demo veremos la ejecución de algunos comandos de docker-machine (Depend
 
     Ahora si ejecutamos docker ps veremos que seguimos teniendo el contenedor de nginx que habíamos lanzado antes de cambiar de máquina docker y si ejecutamos docker system info, tendremos la información de la máquina docker original. 
 
-# 2da DEMO. COMANDOS DOCKER. CREACIÓN DE UNA IMAGEN.
+# DEMO. COMANDOS DOCKER. CREACIÓN DE UNA IMAGEN.
 
 Crearemos una imagen nueva a partir de la imagen base de Ubuntu, a la cual le instalaremos un servidor web Apache2.
 Lo lanzamos con docker run en modo iteractivo y en segundo plano:
