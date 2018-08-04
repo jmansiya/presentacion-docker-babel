@@ -201,21 +201,21 @@ Podemos crear un fichero dentro de ese directorio:
             b9e68dd550d4        host                host                
             ccc5be97afaf        none                null               
 
-    *· host* Representa la red del propio equipo y haría referencia a eth0. El contenedor usará el mismo IP del servidor real que tengamos.
-    *· bridge* representa la red docker0 y a ella se conectan todos los contenedores por defecto.
-    *· none* siginifica que el contenedor no se incluye en ninguna red y si verificamos esto con el comando ifconfig dentro del contenedor veríamos que solo tiene interfade de loopback lo.
+*· host* Representa la red del propio equipo y haría referencia a eth0. El contenedor usará el mismo IP del servidor real que tengamos.
+*· bridge* representa la red docker0 y a ella se conectan todos los contenedores por defecto.
+*· none* siginifica que el contenedor no se incluye en ninguna red y si verificamos esto con el comando ifconfig dentro del contenedor veríamos que solo tiene interfade de loopback lo.
 
-    Se pueden ver o inspecionar los detalles de cada red usando:
+Se pueden ver o inspecionar los detalles de cada red usando:
 
         $ docker network inspect bridge
 
-    ** DETALLE BRIDGE **
-        Puede albergar a 65534 contenedores. Tras ejecutar el comando anterior también podremos ver si esta red tiene o no tiene contenedores en funcionamiento en la red. Todos los contenedores dentro de esta red pueden verse los unos a los otros.
+**DETALLE BRIDGE**
+Puede albergar a 65534 contenedores. Tras ejecutar el comando anterior también podremos ver si esta red tiene o no tiene contenedores en funcionamiento en la red. Todos los contenedores dentro de esta red pueden verse los unos a los otros.
 
-        Esto se puede comprobar si ponemos en funcionamiento dos contenedores, por defecto los creará en la red BRIDGE, comprobamos que están en la red con *'docker network inspect bridge'*. Accedemos a uno de ellos *'docker exec -it <id_container> bash'*, instalamos el comando ping si no está instalado en el contenedor (Para ubuntu - apt-get install iputils-ping). Hacemos ping a la ip asignada al otro contenedor que está dentro de la red BRIDGE, los paquetes enviados por el comando ping deben de llegar todos perfectamente.
+Esto se puede comprobar si ponemos en funcionamiento dos contenedores, por defecto los creará en la red BRIDGE, comprobamos que están en la red con *'docker network inspect bridge'*. Accedemos a uno de ellos *'docker exec -it <id_container> bash'*, instalamos el comando ping si no está instalado en el contenedor (Para ubuntu - apt-get install iputils-ping). Hacemos ping a la ip asignada al otro contenedor que está dentro de la red BRIDGE, los paquetes enviados por el comando ping deben de llegar todos perfectamente.
 
-    * Redes definidas por nosotros *
-    Para poder aislar contenedores es necesario definir una red para esos contenedores que sea distinta de la red bridge que se asigna por defecto. Para ello:
+*Redes definidas por nosotros*
+Para poder aislar contenedores es necesario definir una red para esos contenedores que sea distinta de la red bridge que se asigna por defecto. Para ello:
 
         $ docker network create --driver bridge red-aislada
 
@@ -226,20 +226,19 @@ Podemos crear un fichero dentro de ese directorio:
                 95b2ffbe0be2        none                null                local
                 **d4e4fbf10a2d        red-aislada         bridge              local**
             
-    Vamos a crear un contenedor nuevo y lo vamos a añadir a la red que acabamos de crear:
+Vamos a crear un contenedor nuevo y lo vamos a añadir a la red que acabamos de crear:
 
         $ docker run -itd -p 8000:80 --net=red-aislada --name apacheServer2 apache2/ubuntu:v1 /usr/sbin/apache2ctl -D FOREGROUND
         
-    El nuevo contenedor me lo ha creado en otra red y por lo tanto tiene una ip que no será accesible desde los contenedores de la red bridge. (Probar mediante el comando ping)
+El nuevo contenedor me lo ha creado en otra red y por lo tanto tiene una ip que no será accesible desde los contenedores de la red bridge. (Probar mediante el comando ping)
 
-    *Redes superpuestas o OVERLAY network*
-    Cuando necesitamos añadir mas hosts. Una red superpuesto sirve para unir varios host de una manera segura utiliando VXLAN. Esta librería perita hacer esto, incluso permite desarrollar nuestros propios drivers. 
+*Redes superpuestas o OVERLAY network*
+Cuando necesitamos añadir mas hosts. Una red superpuesto sirve para unir varios host de una manera segura utiliando VXLAN. Esta librería perita hacer esto, incluso permite desarrollar nuestros propios drivers. 
 
-    Para desarrollo de aplicaciones, testing o integración continua nos servirá perfectamente con la redes que vienen creadas por defecto. Sin embargo si queremos definir más de un servicio en un host o tener un enjambre de host para tener un scalamiento horizontal necesitaremos definir este tipo de redes y conviene conocer estas opciones.
+Para desarrollo de aplicaciones, testing o integración continua nos servirá perfectamente con la redes que vienen creadas por defecto. Sin embargo si queremos definir más de un servicio en un host o tener un enjambre de host para tener un scalamiento horizontal necesitaremos definir este tipo de redes y conviene conocer estas opciones.
 
-
-    Para profundizar en la teoria de red de docker este blog con estas dos entradas es bastante interesante:
-        [Don Docker Introducción redes con Docker] http://dondocker.com/como-hacer-redes-con-docker/
-        [Don Docker. Redes con varios host con Docker] http://dondocker.com/redes-con-varios-host-con-docker/
+Para profundizar en la teoria de red de docker este blog con estas dos entradas es bastante interesante:
+[Don Docker Introducción redes con Docker] (http://dondocker.com/como-hacer-redes-con-docker/)
+[Don Docker. Redes con varios host con Docker] (http://dondocker.com/redes-con-varios-host-con-docker/)
 
   
