@@ -246,3 +246,64 @@ Para profundizar en la teoria de red de docker este blog con estas dos entradas 
 - [Don Docker. Redes con varios host con Docker](http://dondocker.com/redes-con-varios-host-con-docker/)
 
   
+## Variables de entorno
+Podemos modificar las variables de entorno de un contenedor con el flag –e (--env). También podemos pasarlas desde un fichero externo con --env-file
+
+Para poder ver las variables de entorno usaremos:
+ 
+        $ docker run -d -p 8000:80 -e ENTORNO='DESARROLLO' --name apacheServer2 apache2/ubuntu:v1 /usr/sbin/apache2ctl -D FOREGROUND
+        $ docker exec apacheServer2 env
+            PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+            HOSTNAME=62d8f3b8dca7
+            ENTORNO=DESARROLLO   
+            HOME=/root
+
+        //Podemos pasar las variables en un fichero txt por ejemplo:
+        // variables.txt
+        //      var1=variable1
+        //      var2=variable2
+        //      var3=variable3
+        //      var4=variable4
+
+        $ docker run -d -p 8000:80 --env-file ./variables.txt --name apacheServer2 apache2/ubuntu:v1 /usr/sbin/apache2ctl -D FOREGROUND
+        $ docker exec apacheServer2 env
+            PATH=/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+            HOSTNAME=ed65ba12ba30
+            var1=variable1
+            var2=variable2
+            var3=variable3
+            var4=variable4
+            HOME=/root
+
+## Eliminar un contenedor.
+Para eliminar un contenedor podemos hacerlo por el nombre o por el ID.  Para poder eliminarlo debe estar parado. Si no lo estuviera tendríamos que pararlo con ‘stop’.
+Utilizamos el commando **rm**. Si queremos ahorrarnos el paso de pararlo usamos *–f*.
+
+        $ docker stop apacheServer2
+        $ docker rm apacheServer2
+
+## Comandos interesantes.
+- docker cp. Permite copiar ficheros desde el host hasta el contenedor y viceversa
+        //Tenemos el fichero prueba.txt lo vamos a enviar dentro del tmp del contenedor apacheServer2
+        $ docker cp ./prueba.txt apacheServer2:/tmp/prueba.txt
+
+        //Creamos un fichero dentro del tmp del contenedor apacheServer2 y lo enviamos a la máquina host en la que está corriendo el contenedor.
+        $ docker cp apacheServer2:/tmp/pruebaContainer.txt ./pruebaContainer.txt
+
+- docker system. Módulo de docker que nos permite conocer el estado del sistema docker.
+
+| COMANDO  |     DESCRIPCION  |
+|----------|-------------------|
+| docker system df |  Muestra el uso de disco de docker. Numero de imagenes, contenedores, volúmenes así como el tamaño que ocupa |
+| docker system events | Obtiene los eventos en tiempo real que se producen desde el servidor |
+| docker system info | Muestra información más detallada del sistema |
+| docker system prune | Elimina los datos que no están en uso |
+
+        $ docker system df
+            TYPE                TOTAL               ACTIVE              SIZE                RECLAIMABLE
+            Images              5                   1                   430.1MB             293MB (68%)
+            Containers          1                   1                   464B                0B (0%)
+            Local Volumes       0                   0                   0B                  0B
+            Build Cache         0                   0                   0B                  0B
+
+
