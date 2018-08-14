@@ -85,7 +85,7 @@ Ejecutamos la imagen generada:
         $ docker run -itd -p 80:80 --name servidor_web josemansilla/apache2:1.0
 
 
-### Creación una imagen con con php a partir de nuestra imagen con apache2
+## Creación una imagen con con php a partir de nuestra imagen con apache2
 
 Para ello creamos un nuevo directorio vacio, por ejemplo:
 
