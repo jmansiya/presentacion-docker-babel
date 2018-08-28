@@ -210,6 +210,7 @@ Obtendremos una pantalla como la siguiente:
 
 ![Construcción automática correcta](../imagenes/dockerhub9.jpg "Construcción automática correcta")
 
+Una vez que ya tenemos nuestra imagen generado de forma automática en docker hub, esta imagen se podrá descargar como indica el comando pull de la pestalla 'Repo Info'
 
 ## DEMO. MICROSERVICOS SPRING BOOT, SERVICIOS NETFLIX EN DOCKER.
 En este directorio tenemos el código de los diferentes servicios de Spring Boot y de la arquitectura Netflix que se utilizarán en la DEMO 3 de la presentación de Introducción a Docker.
