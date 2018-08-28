@@ -9,7 +9,7 @@ En la demo anterior, estudiamos un método para crear nuevas imágenes a partir 
 
 Un **Dockerfile** es un fichero de texto donde indicamos los comandos que queremos ejecutar sobre una imagen base para crear una nueva imagen. El comando docker build construye la nueva imagen leyendo las instrucciones del fichero Dockerfile y la información de un entorno. Tenemos que tener en cuenta que cada instrucción ejecutada crea una imagen intermedia.
 
-![alt text](https://github.com/jmansiya/presentacion-docker-babel/blob/master/demo%20microservicios/dockerfile.png "DockerFile to image")
+![alt text](dockerfile.png "DockerFile to image")
 
 **Buenas prácticas al crear Dockerfile**
 
@@ -171,19 +171,45 @@ Esta solución es la más cómoda, porque no es necesario generar la imagen en n
 
  - Una vez que tenemos un repositorio git con todo lo necesario para la generación de las imágenes Docker lo primero vamos a la página de docker hub y seleccionamos Create >  Create Automated Build:
 
- ![Crear construcción automática. 1er paso](../imagenes/dockerhub1.jpg)
+ ![Crear construcción automática. 1er paso](../imagenes/dockerhub1.jpg "Crear construcción automática. 1er paso")
 
   Si es la primera vez que lo hacemos tenemos que conectar docker con github y permitir que docker hub pueda acceder a nuestro repositorio, elegimos que nos vamos a conectar a github y seleccionamos la primera opción (public and Private)
 
-  ![Associar docker hub a github](../imagenes/dockerhub2.jpg)
+  ![Associar docker hub a github](../imagenes/dockerhub2.jpg "Associar docker hub a github")
 
   Si todo va correctamente mediante SSO docker Hub encontrará la cuenta de github que tenemos en nuestro equipo configurado, nos solicitará permisos para acceder al GitHub. Aceptamos y nos solicitará las contraseñas del administrador del equipo en caso de que sea necesario y la contraseña del github al que se desea conectar.
 
-  ![Autorización acceso Docker Hub a GitHub](../imagenes/dockerhub3.jpg)
+  ![Autorización acceso Docker Hub a GitHub](../imagenes/dockerhub3.jpg "Autorización acceso Docker Hub a GitHub")
 
   Si todo el proceso ha termiando sin problemas deberemos tener ya asociada una cuenta github a nuestra cuenta de docker hub. Solo se podrá tener un link por cuenta de docker hub.
 
-  ![Proceso de Linked Accounts finalizado](../imagenes/dockerhub4.jpg)
+  ![Proceso de Linked Accounts finalizado](../imagenes/dockerhub4.jpg "Proceso de Linked Accounts finalizado")
+
+  Una vez que hemos finalizado con la configuración de Link con entre las cuentas de Docker Hub y de Git Hub, ya podemos crear un "Automated Build", para ello comenzamos eliguiendo el repositorio github:
+
+  ![Crear construcción automática 1er paso](../imagenes/dockerhub5.jpg "Crear construcción automática 1er paso")
+
+  El siguiente paso sería configurar el nombre de la imagen en el reposirotio deocker hub, y configurar si se desea un comportamiento determinado para cada rama en el caso de que existan ramas.
+
+  ![Configuración construcción automática](../imagenes/dockerhub6.jpg "Configuración construcción automática")
+
+  Si todo ha ido correctamente deberemos tener una pantalla indicando la información general de la imagen que acabamos de subir al Docker Hub.
+
+  ![Detalle de la construcción automática generada](../imagenes/dockerhub7.jpg "Detalle de la construcción automática generada")
+
+  Pasado un tiempo desde la creación de la construcción automática se realizará la primera construcción de la imagen a partir del reposirotio GIT, si no deseamos esperar para comprobar que la automatización funciona correctamente podemos hacer push en el repositorio git y esto lanzará la construcción de la imagen.
+
+  Una vez que se ha ejecutado el build se puede ver el Dockerfile que se ha ejecutado, así como los detalles de las construcciónes. Se pueden configurar acciones que se pueden desencadenar despues de cada ejecución de la construcción automática etc etc.
+
+  **Si se opta por esta opción para la generación de las imagenes se debe tener en cuenta de que toda imagen de la que dependa la imagen que deseamos construir debe estar accesible en docker hub de lo contrario la construcción dará un error como el que se muestra en la siguiente imagen**
+
+![Error construcción automática](../imagenes/dockerhub8.jpg "Error construcción automática")
+
+Una vez solucionado el error podemos lanzar desde Build Settings >>  Branch Master Pulsando el botón Trigger.
+Obtendremos una pantalla como la siguiente:
+
+![Construcción automática correcta](../imagenes/dockerhub9.jpg "Construcción automática correcta")
+
 
 ## DEMO. MICROSERVICOS SPRING BOOT, SERVICIOS NETFLIX EN DOCKER.
 En este directorio tenemos el código de los diferentes servicios de Spring Boot y de la arquitectura Netflix que se utilizarán en la DEMO 3 de la presentación de Introducción a Docker.
