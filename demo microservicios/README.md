@@ -1,9 +1,14 @@
 # EQUIPO ARQUITECTURA BABEL. 
 
+[TOC]
+
+
+
 ## DEMO. DOCKERFILE.
+
 En este apartado de la demo explicaremos brevemente la generación de imágenes docker mediante Dockerfiles.
 
-### GENERACIÓN DE IMAGEN A PARTIR DE UN FICHERO DOCKERFILE.
+## GENERACIÓN DE IMAGEN A PARTIR DE UN FICHERO DOCKERFILE.
 
 En la demo anterior, estudiamos un método para crear nuevas imágenes a partir de contenedores que anteriormente habíamos configurado. En esta entrada vamos a presentar la forma más usual de crear nuevas imágenes: usando el comando docker buid y definiendo las características que queremos que tenga la imagen en un fichero Dockerfile.
 
@@ -212,5 +217,25 @@ Obtendremos una pantalla como la siguiente:
 
 Una vez que ya tenemos nuestra imagen generado de forma automática en docker hub, esta imagen se podrá descargar como indica el comando pull de la pestalla 'Repo Info'
 
-## DEMO. MICROSERVICOS SPRING BOOT, SERVICIOS NETFLIX EN DOCKER.
-En este directorio tenemos el código de los diferentes servicios de Spring Boot y de la arquitectura Netflix que se utilizarán en la DEMO 3 de la presentación de Introducción a Docker.
+## DEMO. DOCKER-COMPOSE. 
+
+### INTRODUCCIÓN
+
+Una vez que ya sabemos como se pueden crear, levantar y distribuir imagenes docker. El siguiente paso es poder levantar un sistema compuesto por varios contenedores que se comunican entre sí. Para ello podemos construir y levantar los contenedores uno a uno o bien, crearnos un ficher **yaml** que pueda ser interpretado por el servicio docker-compose que viene instalado junto con el cliente docker que hayamos instalado en nuestra máquina. 
+
+Para comprobar que tenemos instalado y funcionando correctamente docker-compose:
+
+​	$ docker-compose --version
+
+Docker-compose manipula varios contenedores haciendo uso de archivos de configuración en formato YAML. Docker-compose es capaz de leer e interpretar ficheros YAML en los cuales se componen de una serie de pares Key:Value. La lista de posibles keys soportadas por docker-compose se puede ver [aquí](ClavesDockerCompose.md).
+
+Docker-compose soporta una serie de comandos de los cuales los más habituales se pueden ver en este [enlace](ComandosDockerCompose.md).
+
+
+
+### MICROSERVICOS SPRING BOOT, SERVICIOS NETFLIX EN DOCKER.
+
+Para realizar una prueba mas completa para poder ver el funcionamiento del comando docker-compose, vamos a realizar el despliegue de un entorno completo formado por varios micro servicios de Spring Boot orquestados por los servicios Eureka y Zuul de la arquitectura Netflix. Además tendremos una SPA desarrollada en Angular que utilizará estos servicios para insertar y consultar información. La arquitectura montada sería la siguiente:
+
+
+
