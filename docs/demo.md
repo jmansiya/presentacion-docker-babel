@@ -14,7 +14,7 @@ En la demo anterior, estudiamos un método para crear nuevas imágenes a partir 
 
 Un **Dockerfile** es un fichero de texto donde indicamos los comandos que queremos ejecutar sobre una imagen base para crear una nueva imagen. El comando docker build construye la nueva imagen leyendo las instrucciones del fichero Dockerfile y la información de un entorno. Tenemos que tener en cuenta que cada instrucción ejecutada crea una imagen intermedia.
 
-![alt text](dockerfile.png "DockerFile to image")
+![alt text](imagenes/dockerfile.png "DockerFile to image")
 
 **Buenas prácticas al crear Dockerfile**
 
