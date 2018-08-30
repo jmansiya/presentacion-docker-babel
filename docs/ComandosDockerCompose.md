@@ -1,3 +1,7 @@
+---
+layout: default
+title: DOCKER-COMPOSE. COMANDOS SOPORTADOS.
+---
 DOCKER-COMPOSE. COMANDOS SOPORTADOS.
 
 Lista de comandos mas habituales soportados por docker-compose:

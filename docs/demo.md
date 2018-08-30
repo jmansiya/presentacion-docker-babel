@@ -1,3 +1,7 @@
+---
+layout: default
+title: Demo
+---
 # EQUIPO ARQUITECTURA BABEL. 
 
 [TOC]

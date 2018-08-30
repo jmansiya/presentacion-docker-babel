@@ -1,3 +1,6 @@
+---
+layout: default
+---
 # EQUIPO ARQUITECTURA BABEL. 
 
 ## INTRODUCCIÓN A DOCKER.

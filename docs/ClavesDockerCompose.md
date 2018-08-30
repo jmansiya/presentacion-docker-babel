@@ -1,4 +1,8 @@
-# DOCKER-COMPOSE. LISTA DE KEYS SOPORTADAS.
+---
+layout: default
+title: DOCKER-COMPOSE. LISTA DE KEYS SOPORTADAS.
+---
+# {{page.title}}
 
 A continuación se muestra una lista de keys soportadas en el docker-compose:
 
