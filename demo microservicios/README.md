@@ -1,15 +1,20 @@
 # EQUIPO ARQUITECTURA BABEL. 
 
+[TOC]
+
+
+
 ## DEMO. DOCKERFILE.
+
 En este apartado de la demo explicaremos brevemente la generación de imágenes docker mediante Dockerfiles.
 
-### GENERACIÓN DE IMAGEN A PARTIR DE UN FICHERO DOCKERFILE.
+## GENERACIÓN DE IMAGEN A PARTIR DE UN FICHERO DOCKERFILE.
 
 En la demo anterior, estudiamos un método para crear nuevas imágenes a partir de contenedores que anteriormente habíamos configurado. En esta entrada vamos a presentar la forma más usual de crear nuevas imágenes: usando el comando docker buid y definiendo las características que queremos que tenga la imagen en un fichero Dockerfile.
 
 Un **Dockerfile** es un fichero de texto donde indicamos los comandos que queremos ejecutar sobre una imagen base para crear una nueva imagen. El comando docker build construye la nueva imagen leyendo las instrucciones del fichero Dockerfile y la información de un entorno. Tenemos que tener en cuenta que cada instrucción ejecutada crea una imagen intermedia.
 
-![alt text](https://github.com/jmansiya/presentacion-docker-babel/blob/master/demo%20microservicios/dockerfile.png "DockerFile to image")
+![alt text](dockerfile.png "DockerFile to image")
 
 **Buenas prácticas al crear Dockerfile**
 
@@ -128,12 +133,20 @@ Para poder compartir una imagen creada previamente en nuestro equipo tenemos la 
 Este comando generará un fichero tar que podemos ver:
 
         $ ls -alh
-
-`Pendiente poner el resultado de este comando` 
+        ..
+        -rw-------   1 josemansilla  staff  228420608 28 ago 23:26 php7.tar
 
 Una vez que hemos copiado el fichero tar en el equipo de destino podemos cargar la imagen con el siguiente comando:
 
         $ docker load -i php7.tar josemansilla/php7:1.0
+                8f0f8fd17633: Loading layer [==================================================>]  16.98MB/16.98MB
+                604ab14c4c39: Loading layer [==================================================>]  3.584kB/3.584kB
+                Loaded image: josemansilla/php7:1.0
+        
+        $ docker image ls
+                REPOSITORY             TAG                 IMAGE ID            CREATED             SIZE
+                josemansilla/php7      1.0                 33d1f8c4a2e9        2 weeks ago         220MB
+
 
 2. Distribución de imagenes en docker hub.
 
@@ -157,13 +170,72 @@ También podemos realizar una búsqueda mediante la consola con el siguiente com
         $ docker search josemansilla
 
 3. Generación automática de imágenes en docker hub.
-Esta solución es la más cómoda, porque no es necesario generar la imagen en nuestro ordenador para postriormente subirla al registro. Para realizar la generación automática necestiamos guardar los ficheros de nuestro contexto (fichero Dockerfile y el resto de ficheros que vamos a guardar en la imagen) en un repositorio GitHub.
+Esta solución es la más cómoda, porque no es necesario generar la imagen en nuestro ordenador para postriormente subirla al registro. Para realizar la generación automática necestiamos guardar los ficheros de nuestro contexto (fichero Dockerfile y el resto de ficheros que vamos a guardar en la imagen) en un repositorio GitHub. 
 
- - Primero vamos a la página de docker hub y seleccionamos Create >  Create Automated Build:
+ - Repositorio git utilizado para la prueba: `https://github.com/jmansiya/phpDockerDemo.git`
 
- ![Crear construcción automática. 1er paso](../imagenes/dockerhub1.jpg)
+ - Una vez que tenemos un repositorio git con todo lo necesario para la generación de las imágenes Docker lo primero vamos a la página de docker hub y seleccionamos Create >  Create Automated Build:
 
-## DEMO. MICROSERVICOS SPRING BOOT, SERVICIOS NETFLIX EN DOCKER.
-En este directorio tenemos el código de los diferentes servicios de Spring Boot y de la arquitectura Netflix que se utilizarán en la DEMO 3 de la presentación de Introducción a Docker.
+ ![Crear construcción automática. 1er paso](../imagenes/dockerhub1.jpg "Crear construcción automática. 1er paso")
+
+  Si es la primera vez que lo hacemos tenemos que conectar docker con github y permitir que docker hub pueda acceder a nuestro repositorio, elegimos que nos vamos a conectar a github y seleccionamos la primera opción (public and Private)
+
+  ![Associar docker hub a github](../imagenes/dockerhub2.jpg "Associar docker hub a github")
+
+  Si todo va correctamente mediante SSO docker Hub encontrará la cuenta de github que tenemos en nuestro equipo configurado, nos solicitará permisos para acceder al GitHub. Aceptamos y nos solicitará las contraseñas del administrador del equipo en caso de que sea necesario y la contraseña del github al que se desea conectar.
+
+  ![Autorización acceso Docker Hub a GitHub](../imagenes/dockerhub3.jpg "Autorización acceso Docker Hub a GitHub")
+
+  Si todo el proceso ha termiando sin problemas deberemos tener ya asociada una cuenta github a nuestra cuenta de docker hub. Solo se podrá tener un link por cuenta de docker hub.
+
+  ![Proceso de Linked Accounts finalizado](../imagenes/dockerhub4.jpg "Proceso de Linked Accounts finalizado")
+
+  Una vez que hemos finalizado con la configuración de Link con entre las cuentas de Docker Hub y de Git Hub, ya podemos crear un "Automated Build", para ello comenzamos eliguiendo el repositorio github:
+
+  ![Crear construcción automática 1er paso](../imagenes/dockerhub5.jpg "Crear construcción automática 1er paso")
+
+  El siguiente paso sería configurar el nombre de la imagen en el reposirotio deocker hub, y configurar si se desea un comportamiento determinado para cada rama en el caso de que existan ramas.
+
+  ![Configuración construcción automática](../imagenes/dockerhub6.jpg "Configuración construcción automática")
+
+  Si todo ha ido correctamente deberemos tener una pantalla indicando la información general de la imagen que acabamos de subir al Docker Hub.
+
+  ![Detalle de la construcción automática generada](../imagenes/dockerhub7.jpg "Detalle de la construcción automática generada")
+
+  Pasado un tiempo desde la creación de la construcción automática se realizará la primera construcción de la imagen a partir del reposirotio GIT, si no deseamos esperar para comprobar que la automatización funciona correctamente podemos hacer push en el repositorio git y esto lanzará la construcción de la imagen.
+
+  Una vez que se ha ejecutado el build se puede ver el Dockerfile que se ha ejecutado, así como los detalles de las construcciónes. Se pueden configurar acciones que se pueden desencadenar despues de cada ejecución de la construcción automática etc etc.
+
+  **Si se opta por esta opción para la generación de las imagenes se debe tener en cuenta de que toda imagen de la que dependa la imagen que deseamos construir debe estar accesible en docker hub de lo contrario la construcción dará un error como el que se muestra en la siguiente imagen**
+
+![Error construcción automática](../imagenes/dockerhub8.jpg "Error construcción automática")
+
+Una vez solucionado el error podemos lanzar desde Build Settings >>  Branch Master Pulsando el botón Trigger.
+Obtendremos una pantalla como la siguiente:
+
+![Construcción automática correcta](../imagenes/dockerhub9.jpg "Construcción automática correcta")
+
+Una vez que ya tenemos nuestra imagen generado de forma automática en docker hub, esta imagen se podrá descargar como indica el comando pull de la pestalla 'Repo Info'
+
+## DEMO. DOCKER-COMPOSE. 
+
+### INTRODUCCIÓN
+
+Una vez que ya sabemos como se pueden crear, levantar y distribuir imagenes docker. El siguiente paso es poder levantar un sistema compuesto por varios contenedores que se comunican entre sí. Para ello podemos construir y levantar los contenedores uno a uno o bien, crearnos un ficher **yaml** que pueda ser interpretado por el servicio docker-compose que viene instalado junto con el cliente docker que hayamos instalado en nuestra máquina. 
+
+Para comprobar que tenemos instalado y funcionando correctamente docker-compose:
+
+​	$ docker-compose --version
+
+Docker-compose manipula varios contenedores haciendo uso de archivos de configuración en formato YAML. Docker-compose es capaz de leer e interpretar ficheros YAML en los cuales se componen de una serie de pares Key:Value. La lista de posibles keys soportadas por docker-compose se puede ver [aquí](ClavesDockerCompose.md).
+
+Docker-compose soporta una serie de comandos de los cuales los más habituales se pueden ver en este [enlace](ComandosDockerCompose.md).
+
+
+
+### MICROSERVICOS SPRING BOOT, SERVICIOS NETFLIX EN DOCKER.
+
+Para realizar una prueba mas completa para poder ver el funcionamiento del comando docker-compose, vamos a realizar el despliegue de un entorno completo formado por varios micro servicios de Spring Boot orquestados por los servicios Eureka y Zuul de la arquitectura Netflix. Además tendremos una SPA desarrollada en Angular que utilizará estos servicios para insertar y consultar información. La arquitectura montada sería la siguiente:
+
 
 
