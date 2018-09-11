@@ -16,9 +16,9 @@ Para comprobar que tenemos instalado y funcionando correctamente docker-compose:
 
 ​	$ docker-compose --version
 
-Docker-compose manipula varios contenedores haciendo uso de archivos de configuración en formato YAML. Docker-compose es capaz de leer e interpretar ficheros YAML en los cuales se componen de una serie de pares Key:Value. La lista de posibles keys soportadas por docker-compose se puede ver [aquí](ClavesDockerCompose.md).
+Docker-compose manipula varios contenedores haciendo uso de archivos de configuración en formato YAML. Docker-compose es capaz de leer e interpretar ficheros YAML en los cuales se componen de una serie de pares Key:Value. La lista de posibles keys soportadas por docker-compose se puede ver [aquí](ClavesDockerCompose.html).
 
-Docker-compose soporta una serie de comandos de los cuales los más habituales se pueden ver en este [enlace](ComandosDockerCompose.md).
+Docker-compose soporta una serie de comandos de los cuales los más habituales se pueden ver en este [enlace](ComandosDockerCompose.html).
 
 
 
