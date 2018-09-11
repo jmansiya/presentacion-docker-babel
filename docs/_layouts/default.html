@@ -20,7 +20,7 @@
       {% for page in sorted_pages %}
         {% if page.show_menu %}
         <li class="nav-item">
-          <a class="nav-link" href="{{page.url}}">{{page.title_menu | default: page.url}}</a>
+          <a class="nav-link" href="{{ site.baseurl }}/{{page.url}}">{{page.title_menu | default: page.url}}</a>
         </li>
         {% endif %}
       {% endfor %}
