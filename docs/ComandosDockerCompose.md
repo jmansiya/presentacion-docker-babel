@@ -3,7 +3,7 @@ layout: default
 title: DOCKER-COMPOSE. COMANDOS SOPORTADOS.
 ---
 
-# {page.title}
+# {{page.title}}
 
 Lista de comandos mas habituales soportados por docker-compose:
 
