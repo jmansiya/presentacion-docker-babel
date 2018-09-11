@@ -1,8 +1,11 @@
-# DOCKER-COMPOSE. LISTA DE KEYS SOPORTADAS.
+---
+layout: default
+title: DOCKER-COMPOSE. LISTA DE KEYS SOPORTADAS.
+---
+
+# {{page.title}}
 
 A continuación se muestra una lista de keys soportadas en el docker-compose:
-
-
 
 - **image**: Es la ‘tag’ o id de la imagen.
 - **build**: Es el ‘path’ al directorio que contiene un ‘Dockerfile’
@@ -32,4 +35,4 @@ A continuación se muestra una lista de keys soportadas en el docker-compose:
 - **restart**: Establece la política de reinicio del contenedor.
 - **stdin_open**: Permite el dispositivo de entrada estándar.
 - **tty**: Permite el control basado en texto, como un terminal
-- **cpu_shares**: Establece las partes de la CPU.
+- **cpu_shares**: Establece las partes de la CPU

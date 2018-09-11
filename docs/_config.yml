@@ -1,0 +1,16 @@
+title: Presentación Contenedores Docker
+email: jmansiya@gmail.com
+email_trabajo: jose.mansilla@babel.es
+description: >- # this means to ignore newlines until "baseurl:"
+  Preparación de las diferentes demos utilizadas para la realización de la presentación de 
+  introducción a contenedores Docker.
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
+twitter_username: jmansiya
+github_username:  jmansiya
+
+# Build settings
+markdown: kramdown
+theme: minima
+plugins:
+  - jekyll-feed
