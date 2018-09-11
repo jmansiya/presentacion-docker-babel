@@ -4,8 +4,8 @@ email_trabajo: jose.mansilla@babel.es
 description: >- # this means to ignore newlines until "baseurl:"
   Preparación de las diferentes demos utilizadas para la realización de la presentación de 
   introducción a contenedores Docker.
-baseurl: "/presentacion-docker-babel" # the subpath of your site, e.g. /blog
-url: "https://jmansiya.github.io" # the base hostname & protocol for your site, e.g. http://example.com
+baseurl: "" # the subpath of your site, e.g. /blog
+url: "" # the base hostname & protocol for your site, e.g. http://example.com
 twitter_username: jmansiya
 github_username:  jmansiya
 
