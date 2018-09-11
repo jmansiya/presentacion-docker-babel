@@ -16,18 +16,25 @@
     </header>
     <nav>
       <ul class="nav nav-tabs">
-      {% for page in site.html_pages %}
+      {% assign sorted_pages = site.pages | sort:"weight" %}
+      {% for page in sorted_pages %}
+        {% if page.show_menu %}
         <li class="nav-item">
-          <a class="nav-link" href="{{page.url}}">{{page.title | default: page.url}}</a>
+          <a class="nav-link" href="{{page.url}}">{{page.title_menu | default: page.url}}</a>
         </li>
+        {% endif %}
       {% endfor %}
       </ul>
     </nav>
+    
+    <br>
     <main class="container">
     {{content}}
     </main>
-    <footer class="container">
-       <a href="mailto:{{site.email}}">{{site.email}}</a>
+    <footer class="jumbotron">
+      <p>Contacto</p>
+       <p>Email personal: <a href="mailto:{{site.email}}">{{site.email}}</a></p>
+       <p>Email trabajo:  <a href="mailto:{{site.email_trabajo}}">{{site.email_trabajo}}</a></p>
     </footer>
     <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
