@@ -68,8 +68,8 @@ Esta solución es la más cómoda, porque no es necesario generar la imagen en n
 
   Si es la primera vez que lo hacemos tenemos que conectar docker con github y permitir que docker hub pueda acceder a nuestro repositorio, elegimos que nos vamos a conectar a github y seleccionamos la primera opción (public and Private)
 
-  ![Associar docker hub a github](../imagenes/dockerhub2.jpg "Associar docker hub a github"){:width="100%"}
-
+  ![Associar docker hub a github](../imagenes/dockerhub2.jpg "Associar docker hub a github")
+  
   Si todo va correctamente mediante SSO docker Hub encontrará la cuenta de github que tenemos en nuestro equipo configurado, nos solicitará permisos para acceder al GitHub. Aceptamos y nos solicitará las contraseñas del administrador del equipo en caso de que sea necesario y la contraseña del github al que se desea conectar.
 
   ![Autorización acceso Docker Hub a GitHub](../imagenes/dockerhub3.jpg "Autorización acceso Docker Hub a GitHub")
