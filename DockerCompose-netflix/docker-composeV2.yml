@@ -1,0 +1,44 @@
+version: '2'
+services:
+  eurekaservice:
+    image: josemansilla/microservice_registration:0.0.1-SNAPSHOT
+    restart: always
+    ports:
+      - 1111:1111
+  mongodb:
+    image: mongo
+    restart: always
+  microservice-employee:
+    image: josemansilla/microservicio-employee:1
+    restart: always
+    links:
+      - eurekaservice:eureka-docker
+      - mongodb
+    environment:
+      - SPRING_PROFILES_ACTIVE=docker
+  microservice-empresa:
+    image: josemansilla/microservcio_empresa:0.0.1
+    restart: always
+    links:
+     - eurekaservice:eureka-docker
+     - mongodb
+    environment:
+     - SPRING_PROFILES_ACTIVE=docker
+  loadbalancer:
+    image: josemansilla/edgeservice:0.0.1
+    restart: always
+    links:
+      - eurekaservice:eureka-docker
+    ports:
+      - 8085:8085
+    environment:
+     - SPRING_PROFILES_ACTIVE=docker
+  consolaAdministracion:
+    image: josemansilla/consola-administracion:0.0.1
+    restart: always
+    links:
+      - eurekaservice:eureka-docker
+    ports:
+      - 8099:8099
+    environment:
+     - SPRING_PROFILES_ACTIVE=docker
